@@ -1,7 +1,224 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Brand &amp; Product Perception on</title><link>https://ajdeve.github.io/docs/project3/</link><description>Recent content in Brand &amp; Product Perception on</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Mon, 14 Mar 2022 08:48:45 +0000</lastBuildDate><atom:link href="https://ajdeve.github.io/docs/project3/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://ajdeve.github.io/docs/project3/introduction/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/introduction/</guid><description>Analysis On Beauty Industry # Our goal is to bring more meaningful and multi-dimensional data to users on cosmetic brands and products so that both brands and end-consumers can make informed decisions
-Data Collection: utilize different tools such as Tweepy API, XHR requests to extract product, twitter, brands, reviews and ingredient data from various sources
-Data Cleaning: utilize Python and OpenRefine to clean data and make them ready to import into MySQL</description></item><item><title>Data Profile</title><link>https://ajdeve.github.io/docs/project3/data-profile/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-profile/</guid><description>Data Infrastructure # Data Profile # SOURCE DESCRIPTION DATA SIZE FORMAT Product Kaggle Products listed on Sephora 12.4MB csv Brands Phantom Buster Information on cosmetic brands and company information 226KB json/csv Reviews BazaarVoice API User product reviews on Sephora 500MB json Twitter Tweepy API Users’ tweets with hashtag of brand name 7.3MB csv Ingredient California Safe Cosmetics Program Product DB Chemicals used in cosmetics that are known to be harmful 2.</description></item><item><title>Data Collection</title><link>https://ajdeve.github.io/docs/project3/data-collection/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-collection/</guid><description>XHR # XHR provided a better solution to scrape Sephora product reviews over BS4 &amp;amp; Selenium
-Since scraping with both BS4 and Selenium did not work, we turned to XHR requests This turned to our advantage since the XHR API was generally cleaner, more complete product listing (website removed old products) and contains reviewer metadata
-Tweepy API # Tweeter developer account created to use the free-tier api calls to scrape tweet data per brand (brand, tweet_id, tweet_date, follower_count, retweets, location, tweet_text) Iterate over brand names in brands table and append collected tweets to dataframe using Pandas For 186 brands, avg 110 tweets per brand were collected but number of tweets varied per brand, which could result in diminishing the value of analysis Phantom Buster # Phantom Buster was a great substitute to BS4 to scrape brand data.</description></item><item><title>Data Preparation</title><link>https://ajdeve.github.io/docs/project3/data-preparation/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-preparation/</guid><description>Data Cleanup # Remove NaN Remove Emojis from tweets REGEX to clean tweet text REGEX: Tweet text data includes emoji, hashtag, numbers, links and etc so REGEX is used to clean up each text
-NLTK: NLTK tokenizing by word was used to extract more meaningful and logical words from cleaned tweet texts
-Clustering On Location Data From Tweets # OpenRefine Tweets’ location is not structured so cleaning up the users’ various input on location required heavy clustering that involved:</description></item><item><title>Data Diagrams</title><link>https://ajdeve.github.io/docs/project3/data-diagrams/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-diagrams/</guid><description>OLTP: EER Diagram # There are 8 tables in the database After data collection and processing, import our data into MySQL Workbench and perform reverse enginnering to create the schema Define attributes with approriate data type Follow standard naming convention for tables and attributes Each table contains its unique key as primary key OLAP: Dimensional Diagram # Dimensional Model was developed based on the EER model constructed Used Snowflake Schema and normalized some dimension tables such as location table and product table “Reviews” is the fact table and there are 4 entities: customers, brands, product and date An extra entity, “dim_customers”, exists in dimensional diagram.</description></item><item><title>Business Use Cases</title><link>https://ajdeve.github.io/docs/project3/business-use-cases/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/business-use-cases/</guid><description>Five Business Use Cases # Case 1: Tweet Sentimental Analysis Using TextBlob And NLP # NLP powered tweet analysis # Sentiment analysis is the task of determining the emotional value of a given expression in natural language. Using collected tweets data per brand, perform sentimental analysis using - TextBlob Textblob (NLP Api) sentiment analyzer returns two properties for a given input sentence: Polarity: -1 is negative, +1 is positive sentiment Subjectivity: Subjective sentences generally refer to personal opinion, emotion, or judgment.</description></item><item><title>Result</title><link>https://ajdeve.github.io/docs/project3/result/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/result/</guid><description>Lessons Learned # Larger datasets require paid API calls so data costs should be considered more carefully in data planning process Research API restrictions in data collection is essential as expectation and reality may differ (ie. Tweepy api gives only recent tweets) Heavy web scraping needs ways to bypass access restrictions (ie. Proper header and referrer required to access Sephora website) JavaScript is not rendered with only Python requests Data clean-up is indispensable, yet requires the most amount of time investment after data collection Using a balance of MySQL and NoSQL based on data types improves data handling and ease of producing analyses Expectations on data completeness should be based on data availability and must be managed early on GCP allows for synchronized working environment for team Recommendations # Larger datasets require paid API calls so data costs should be considered more carefully in data planning process Research API restrictions in data collection is essential as expectation and reality may differ (ie.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Brand &amp; Product Perception on</title><link>https://ajdeve.github.io/docs/project3/</link><description>Recent content in Brand &amp; Product Perception on</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 14 Mar 2022 08:48:45 +0000</lastBuildDate><atom:link href="https://ajdeve.github.io/docs/project3/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://ajdeve.github.io/docs/project3/introduction/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/introduction/</guid><description>&lt;h1 id="analysis-on-beauty-industry">Analysis On Beauty Industry &lt;a href="#analysis-on-beauty-industry" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;p>Our goal is to bring more meaningful and multi-dimensional data to users on cosmetic brands and products so that both brands and end-consumers can make informed decisions&lt;/p>
+&lt;p>&lt;strong>Data Collection:&lt;/strong> utilize different tools such as Tweepy API, XHR requests to extract product, twitter, brands, reviews and ingredient data from various sources&lt;/p>
+&lt;p>&lt;strong>Data Cleaning:&lt;/strong> utilize Python and OpenRefine to clean data and make them ready to import into MySQL&lt;/p></description></item><item><title>Data Profile</title><link>https://ajdeve.github.io/docs/project3/data-profile/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-profile/</guid><description>&lt;h2 id="data-infrastructure">Data Infrastructure &lt;a href="#data-infrastructure" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b1.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+
+&lt;h2 id="data-profile">Data Profile &lt;a href="#data-profile" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>&lt;/th>
+ &lt;th style="text-align: center">SOURCE&lt;/th>
+ &lt;th style="text-align: center">DESCRIPTION&lt;/th>
+ &lt;th style="text-align: center">DATA SIZE&lt;/th>
+ &lt;th style="text-align: center">FORMAT&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>Product&lt;/td>
+ &lt;td style="text-align: center">Kaggle&lt;/td>
+ &lt;td style="text-align: center">Products listed on Sephora&lt;/td>
+ &lt;td style="text-align: center">12.4MB&lt;/td>
+ &lt;td style="text-align: center">csv&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Brands&lt;/td>
+ &lt;td style="text-align: center">Phantom Buster&lt;/td>
+ &lt;td style="text-align: center">Information on cosmetic brands and company information&lt;/td>
+ &lt;td style="text-align: center">226KB&lt;/td>
+ &lt;td style="text-align: center">json/csv&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Reviews&lt;/td>
+ &lt;td style="text-align: center">BazaarVoice API&lt;/td>
+ &lt;td style="text-align: center">User product reviews on Sephora&lt;/td>
+ &lt;td style="text-align: center">500MB&lt;/td>
+ &lt;td style="text-align: center">json&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Twitter&lt;/td>
+ &lt;td style="text-align: center">Tweepy API&lt;/td>
+ &lt;td style="text-align: center">Users’ tweets with hashtag of brand name&lt;/td>
+ &lt;td style="text-align: center">7.3MB&lt;/td>
+ &lt;td style="text-align: center">csv&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Ingredient&lt;/td>
+ &lt;td style="text-align: center">California Safe Cosmetics Program Product DB&lt;/td>
+ &lt;td style="text-align: center">Chemicals used in cosmetics that are known to be harmful&lt;/td>
+ &lt;td style="text-align: center">2.2MB&lt;/td>
+ &lt;td style="text-align: center">csv&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="data-quality-dimensions-assessment">Data Quality Dimensions Assessment &lt;a href="#data-quality-dimensions-assessment" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">Completeness&lt;/th>
+ &lt;th style="text-align: center">Accuracy&lt;/th>
+ &lt;th style="text-align: center">Consistency&lt;/th>
+ &lt;th style="text-align: center">Validity&lt;/th>
+ &lt;th style="text-align: center">Uniqueness&lt;/th>
+ &lt;th style="text-align: center">Integrity&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">Original data did not contain all products up to this year and tweets data was limited to recent data&lt;/td>
+ &lt;td style="text-align: center">Tweet data contained inaccurate feedback on brands as search query was simply limited to &amp;ldquo;#brand” and not advanced keywords such as product names&lt;/td>
+ &lt;td style="text-align: center">The amount of data for product, reviews and tweets per brand was not consistent&lt;/td>
+ &lt;td style="text-align: center">For ingredient harmfulness, the data is perfectly valid as it has scientific backing. Using tweet sentiment and review data however, may not be perfectly representative of reality&lt;/td>
+ &lt;td style="text-align: center">A customer may have repeated review based on multiple experience Sentiment analysis may be based on multiple tweets that could have been one&lt;/td>
+ &lt;td style="text-align: center">Entity, domain and referential integrities were considered with constraints&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="etl-process-extraction-transformation--load">ETL Process: Extraction, Transformation &amp;amp; Load &lt;a href="#etl-process-extraction-transformation--load" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b2.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+
+&lt;h2 id="implementation-tools">Implementation Tools &lt;a href="#implementation-tools" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b3.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+
+&lt;h2 id="design-consideraton">Design Consideraton &lt;a href="#design-consideraton" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>&lt;strong>Branding&lt;/strong>
+Original product contains products across all categories, but we limit our data to facial brands under Sephora’s makeup and skincare categories.&lt;/p></description></item><item><title>Data Collection</title><link>https://ajdeve.github.io/docs/project3/data-collection/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-collection/</guid><description>&lt;h2 id="xhr">XHR &lt;a href="#xhr" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>XHR provided a better solution to scrape Sephora product reviews over BS4 &amp;amp; Selenium&lt;/p>
+&lt;p>Since scraping with both BS4 and Selenium did not work, we turned to XHR requests
+This turned to our advantage since the XHR API was generally cleaner, more complete product listing (website removed old products) and contains reviewer metadata&lt;/p>
+&lt;h2 id="tweepy-api">Tweepy API &lt;a href="#tweepy-api" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Tweeter developer account created to use the free-tier api calls to scrape tweet data per brand (brand, tweet_id, tweet_date, follower_count, retweets, location, tweet_text)&lt;/li>
+&lt;li>Iterate over brand names in brands table and append collected tweets to dataframe using Pandas&lt;/li>
+&lt;li>For 186 brands, avg 110 tweets per brand were collected but number of tweets varied per brand, which could result in diminishing the value of analysis&lt;/li>
+&lt;/ul>
+&lt;h2 id="phantom-buster">Phantom Buster &lt;a href="#phantom-buster" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>Phantom Buster was a great substitute to BS4 to scrape brand data.&lt;/p></description></item><item><title>Data Preparation</title><link>https://ajdeve.github.io/docs/project3/data-preparation/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-preparation/</guid><description>&lt;h2 id="data-cleanup">Data Cleanup &lt;a href="#data-cleanup" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Remove NaN&lt;/li>
+&lt;li>Remove Emojis from tweets&lt;/li>
+&lt;li>REGEX to clean tweet text&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>REGEX:&lt;/strong> Tweet text data includes emoji, hashtag, numbers, links and etc so REGEX is used to clean up each text&lt;/p>
+&lt;p>&lt;strong>NLTK:&lt;/strong> NLTK tokenizing by word was used to extract more meaningful and logical words from cleaned tweet texts&lt;/p>
+&lt;h4 id="clustering-on-location-data-from-tweets">Clustering On Location Data From Tweets &lt;a href="#clustering-on-location-data-from-tweets" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;p>&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b4.png"
+ alt="OpenRefine"
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>OpenRefine&lt;/figcaption>
+&lt;/figure>
+
+Tweets’ location is not structured so cleaning up the users’ various input on location required heavy clustering that involved:&lt;/p></description></item><item><title>Data Diagrams</title><link>https://ajdeve.github.io/docs/project3/data-diagrams/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/data-diagrams/</guid><description>&lt;h2 id="oltp-eer-diagram">OLTP: EER Diagram &lt;a href="#oltp-eer-diagram" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b5.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>There are 8 tables in the database&lt;/li>
+&lt;li>After data collection and processing, import our data into MySQL Workbench and perform reverse enginnering to create the schema&lt;/li>
+&lt;li>Define attributes with approriate data type&lt;/li>
+&lt;li>Follow standard naming convention for tables and attributes&lt;/li>
+&lt;li>Each table contains its unique key as primary key&lt;/li>
+&lt;/ul>
+&lt;h2 id="olap-dimensional-diagram">OLAP: Dimensional Diagram &lt;a href="#olap-dimensional-diagram" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b6.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>Dimensional Model was developed based on the EER model constructed&lt;/li>
+&lt;li>Used Snowflake Schema and normalized some dimension tables such as location table and product table&lt;/li>
+&lt;li>“Reviews” is the fact table and there are 4 entities: customers, brands, product and date&lt;/li>
+&lt;li>An extra entity, “dim_customers”, exists in dimensional diagram. Original data source included customer data such as customer username and personal info, but due to data privacy concerns, we decided not to include customer data in our project database&lt;/li>
+&lt;/ul>
+&lt;h2 id="mongodb">MongoDB &lt;a href="#mongodb" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>&lt;strong>Review Context &amp;amp; Metadata Stored&lt;/strong>&lt;/p></description></item><item><title>Business Use Cases</title><link>https://ajdeve.github.io/docs/project3/business-use-cases/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/business-use-cases/</guid><description>&lt;h2 id="five-business-use-cases">Five Business Use Cases &lt;a href="#five-business-use-cases" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b7.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+
+&lt;h3 id="case-1-tweet-sentimental-analysis-using-textblob-and-nlp">Case 1: Tweet Sentimental Analysis Using TextBlob And NLP &lt;a href="#case-1-tweet-sentimental-analysis-using-textblob-and-nlp" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h3>
+&lt;h4 id="nlp-powered-tweet-analysis">NLP powered tweet analysis &lt;a href="#nlp-powered-tweet-analysis" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>Sentiment analysis is the task of determining the emotional value of a given expression in natural language.&lt;/li>
+&lt;li>Using collected tweets data per brand, perform sentimental analysis using - TextBlob&lt;/li>
+&lt;li>Textblob (NLP Api) sentiment analyzer returns two properties for a given input sentence:
+&lt;ul>
+&lt;li>&lt;strong>Polarity:&lt;/strong> -1 is negative, +1 is positive sentiment&lt;/li>
+&lt;li>&lt;strong>Subjectivity:&lt;/strong> Subjective sentences generally refer to personal opinion, emotion, or judgment.
+Use polarity to assign word to each tweet: positive, negative and neutral&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Clients can get insights from sentimental analysis of customers’ tweets.&lt;/strong>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/b8.png"
+ alt=""
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>&lt;/figcaption>
+&lt;/figure>
+&lt;/p></description></item><item><title>Result</title><link>https://ajdeve.github.io/docs/project3/result/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project3/result/</guid><description>&lt;h2 id="lessons-learned">Lessons Learned &lt;a href="#lessons-learned" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Larger datasets require paid API calls so data costs should be considered more carefully in data planning process&lt;/li>
+&lt;li>Research API restrictions in data collection is essential as expectation and reality may differ (ie. Tweepy api gives only recent tweets)&lt;/li>
+&lt;li>Heavy web scraping needs ways to bypass access restrictions (ie. Proper header and referrer required to access Sephora website)&lt;/li>
+&lt;li>JavaScript is not rendered with only Python requests&lt;/li>
+&lt;li>Data clean-up is indispensable, yet requires the most amount of time investment after data collection&lt;/li>
+&lt;li>Using a balance of MySQL and NoSQL based on data types improves data handling and ease of producing analyses&lt;/li>
+&lt;li>Expectations on data completeness should be based on data availability and must be managed early on&lt;/li>
+&lt;li>GCP allows for synchronized working environment for team&lt;/li>
+&lt;/ul>
+&lt;h2 id="recommendations">Recommendations &lt;a href="#recommendations" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>Larger datasets require paid API calls so data costs should be considered more carefully in data planning process&lt;/li>
+&lt;li>Research API restrictions in data collection is essential as expectation and reality may differ (ie. Tweepy api gives only recent tweets)&lt;/li>
+&lt;li>Heavy web scraping needs ways to bypass access restrictions (ie. Proper header and referrer required to access Sephora website)&lt;/li>
+&lt;li>JavaScript is not rendered with only Python requests&lt;/li>
+&lt;li>Data clean-up is indispensable, yet requires the most amount of time investment after data collection&lt;/li>
+&lt;li>Using a balance of MySQL and NoSQL based on data types improves data handling and ease of producing analyses&lt;/li>
+&lt;li>Expectations on data completeness should be based on data availability and must be managed early on&lt;/li>
+&lt;li>GCP allows for synchronized working environment for team&lt;/li>
+&lt;/ul></description></item></channel></rss>

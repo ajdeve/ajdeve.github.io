@@ -1,10 +1,133 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Used Car Price Prediction on</title><link>https://ajdeve.github.io/docs/project2/</link><description>Recent content in Used Car Price Prediction on</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Mon, 14 Mar 2022 08:48:45 +0000</lastBuildDate><atom:link href="https://ajdeve.github.io/docs/project2/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://ajdeve.github.io/docs/project2/introduction/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/introduction/</guid><description>Used Car Price Prediction # Project Objective: # Business Problem: # Asymmetric information, also known as “information failure,” takes place during a transaction where one party has greater material knowledge or better information than the other party.​
-“The Market of Lemons: Quality Uncertainty and the Market Mechanism,” by George Akerlof
-Consumers face incomplete​ information on used cars. The imbalanced information between sellers and buyers give more power to sellers manipulating the prices and giving buyers uncomfortable buying position.</description></item><item><title>Data Collection</title><link>https://ajdeve.github.io/docs/project2/datacollection/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/datacollection/</guid><description>Dataset # Our dataset is taken from Kaggle public dataset (1.45 GB)​. Based on resale car listings on Craigslist​, columns include selling price, car attributes, color, condition, VIN, mileage, make and model, etc.​ We enhanced and imputed some data with data from iSeeCars.
-Used Car Dataset
-MSRP Dataset
-iSeeCar
-👉 Since each listing data is 100% based on seller entry on Craiglist, there is high possibility sellers tend to input false data, resulting in datapoints that are anormal.</description></item><item><title>EDA</title><link>https://ajdeve.github.io/docs/project2/eda/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/eda/</guid><description>Explorative Data Analysis # Perforing EDA, we found a couple of interesting insights.
-Price against key features Price against several key variables:​ # There seems to be a significant difference of price ranges between car manufacturers. However the range within each manufacturer seems very large. It is most possibly due to high number of different car models. That&amp;rsquo;s why we will not include manufacturer and model as predictors as they can be better represented by other more relevant variables.</description></item><item><title>Pre-modelling</title><link>https://ajdeve.github.io/docs/project2/pre-modelling/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/pre-modelling/</guid><description>Pre-modelling # Initial Outlier handling &amp;amp; filling in null values​ # Odometer: ​ # Highly right skewed ​ Outliers are removed: Upper threshold +7* stdev​ Condition: # Fill nulls based on odometer​ Newer condition has low odometer. Quantile &amp;lt;25% = Excellent​ Quantile 25%-50% = Good​ Quantile &amp;gt;50% = Fair​ NA = Fair​ Transmission: ​ # drop NA rows (~0.6%)​ Categorical variables: # Fill in NA with mode​ For cylinders, drive, type, fuel​ Fill NA with the most common types based on matched model and​ manufacturer​ Fill the rest of NA with mode​ Created Features: ​ # Color: 12 colors into binary column of &amp;ldquo;is_neutral&amp;quot;​</description></item><item><title>Re-engineering</title><link>https://ajdeve.github.io/docs/project2/re-engineering/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/re-engineering/</guid><description>Post-modelling # Re-engineering # After running the base models with initially feature engineered dataset, we saw low performing results and then re-engineered.
-Contextual Anomaly Detection # Odometer: ​ # Standard car odometer should have max 300,000 miles.​ Trimming data with 75th quantile + 3*IQR, ~268,000, as a cut reduced skewness from 3.04 to 0.3​. Only new car should have 0 odometer so trimmed otherwise​. Price:​ # Dropped cars below $1000 and greater than $200,000 that​ are in the extreme ranges not fit for our analysis purpose​ Max car price was three billion dollars ​ MSRP:​ # MSRP is the manufacturer&amp;rsquo;s suggested retail price (list price) ​ Dropped MSRP &amp;lt; car price as MSRP should be higher than​ used car selling price​ Code Reference</description></item><item><title>Models</title><link>https://ajdeve.github.io/docs/project2/models/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/models/</guid><description>Models # Our goal is to predict the sale price of a used car, which is a supervised regression problem. We pick our models base on two considerations, flexibility (accuracy) and interpretability.​ We value model accuracy over interpretability because:​ The industry we are in doesn’t require we provide explanation for the decision we make.​ Features of our used car dataset are easy to understand, thus making it easy for us to debug the model even without high model interpretability.</description></item><item><title>Result</title><link>https://ajdeve.github.io/docs/project2/result/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/result/</guid><description>Model Results # Just like our expectation, Ensemble Tree methods, specifically XGBoost has the best overall performance. ​ This is not very surprising since ensemble method is known to:​
-Have higher predictive accuracy, compared to the individual models.​ Be very useful when there is both linear and non-linear type of data in the dataset​ Linear Regression and Linear SVR, like expected, didn’t perform well. From the R squared score, we see that both models could not capture all the variance of our data.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Used Car Price Prediction on</title><link>https://ajdeve.github.io/docs/project2/</link><description>Recent content in Used Car Price Prediction on</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 14 Mar 2022 08:48:45 +0000</lastBuildDate><atom:link href="https://ajdeve.github.io/docs/project2/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://ajdeve.github.io/docs/project2/introduction/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/introduction/</guid><description>&lt;h1 id="used-car-price-prediction">Used Car Price Prediction &lt;a href="#used-car-price-prediction" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;h2 id="project-objective">Project Objective: &lt;a href="#project-objective" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;h3 id="business-problem">Business Problem: &lt;a href="#business-problem" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h3>
+&lt;p>Asymmetric information, also known as “information failure,” takes place during a transaction where one party has greater material knowledge or better information than the other party.​&lt;/p>
+&lt;p>“The Market of Lemons: Quality Uncertainty and the Market Mechanism,” by George Akerlof&lt;/p>
+&lt;p>Consumers face incomplete​ information on used cars. The imbalanced information between sellers and buyers give more power to sellers manipulating the prices and giving buyers uncomfortable buying position. ​&lt;/p></description></item><item><title>Data Collection</title><link>https://ajdeve.github.io/docs/project2/datacollection/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/datacollection/</guid><description>&lt;h2 id="dataset">Dataset &lt;a href="#dataset" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>Our dataset is taken from Kaggle public dataset (1.45 GB)​. Based on resale car listings on Craigslist​, columns include selling price, car attributes, color, condition, VIN, mileage, make and model, etc.​ We enhanced and imputed some data with data from iSeeCars.&lt;/p>
+&lt;p>&lt;a href="https://www.kaggle.com/austinreese/craigslist-carstrucks-data%E2%80%8B">Used Car Dataset&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.kaggle.com/CooperUnion/cardataset%E2%80%8B">MSRP Dataset&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.iseecars.com/">iSeeCar&lt;/a>&lt;/p>
+&lt;div class="alert alert-doks d-flex" role="alert">
+ &lt;div class="flex-shrink-1 alert-icon">👉 &lt;/div>
+ 
+ &lt;div class="w-100">Since each listing data is 100% based on seller entry on Craiglist, there is high possibility sellers tend to input false data, resulting in datapoints that are anormal. &lt;/div>
+ 
+&lt;/div>
+
+&lt;h3 id="incorporating-external-data">Incorporating External Data &lt;a href="#incorporating-external-data" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h3>
+&lt;p>To impute some of the columns, we looked at the most common​ value for each car model​.&lt;/p></description></item><item><title>EDA</title><link>https://ajdeve.github.io/docs/project2/eda/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/eda/</guid><description>&lt;h1 id="explorative-data-analysis">Explorative Data Analysis &lt;a href="#explorative-data-analysis" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;p>Perforing EDA, we found a couple of interesting insights.&lt;/p>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/eda1.png"
+ alt="Price against key features"
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>Price against key features&lt;/figcaption>
+&lt;/figure>
+
+&lt;h2 id="price-against-several-key-variables">Price against several key variables:​ &lt;a href="#price-against-several-key-variables" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>There seems to be a significant difference of price ranges between car manufacturers. However the range within each manufacturer seems very large. It is most possibly due to high number of different car models. That&amp;rsquo;s why we will not include manufacturer and model as predictors as they can be better represented by other more relevant variables.​&lt;/li>
+&lt;li>For MSRP and Production, at a glance, there doesn’t seem to be a clear linear relationship to price. But when we look closely, there&amp;rsquo;s an indication of higher price with a higher MSRP and the latest the production year is.​&lt;/li>
+&lt;/ul>
+&lt;h2 id="locational-insights">Locational Insights &lt;a href="#locational-insights" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/eda2.png"
+ alt="Location Insights"
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>Location Insights&lt;/figcaption>
+&lt;/figure>
+
+&lt;p>​Next we&amp;rsquo;re looking at regional distribution of the listings. From the longitude and latitude we can see that the listings are focused in the US, with some anomalies outside the US. We were not doing any transformation to this as we will not use this as predictors.​&lt;/p></description></item><item><title>Pre-modelling</title><link>https://ajdeve.github.io/docs/project2/pre-modelling/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/pre-modelling/</guid><description>&lt;h1 id="pre-modelling">Pre-modelling &lt;a href="#pre-modelling" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;h2 id="initial-outlier-handling--filling-in-null-values">Initial Outlier handling &amp;amp; filling in null values​ &lt;a href="#initial-outlier-handling--filling-in-null-values" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;h4 id="odometer-">Odometer: ​ &lt;a href="#odometer-" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>Highly right skewed ​&lt;/li>
+&lt;li>Outliers are removed: Upper threshold +7* stdev​&lt;/li>
+&lt;/ul>
+&lt;h4 id="condition">Condition: &lt;a href="#condition" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>Fill nulls based on odometer​&lt;/li>
+&lt;/ul>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/f1.png"
+ alt="Newer condition has low odometer."
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>Newer condition has low odometer.&lt;/figcaption>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>Quantile &amp;lt;25% = Excellent​&lt;/li>
+&lt;li>Quantile 25%-50% = Good​&lt;/li>
+&lt;li>Quantile &amp;gt;50% = Fair​&lt;/li>
+&lt;li>NA = Fair​&lt;/li>
+&lt;/ul>
+&lt;h4 id="transmission-">Transmission: ​ &lt;a href="#transmission-" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>drop NA rows (~0.6%)​&lt;/li>
+&lt;/ul>
+&lt;h4 id="categorical-variables">Categorical variables: &lt;a href="#categorical-variables" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>Fill in NA with mode​&lt;/li>
+&lt;li>For cylinders, drive, type, fuel​&lt;/li>
+&lt;li>Fill NA with the most common types based on matched model and​
+manufacturer​&lt;/li>
+&lt;li>Fill the rest of NA with mode​&lt;/li>
+&lt;/ul>
+&lt;h2 id="created-features-">Created Features: ​ &lt;a href="#created-features-" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>&lt;strong>Color:&lt;/strong> 12 colors into binary column of &amp;ldquo;is_neutral&amp;quot;​&lt;/p></description></item><item><title>Re-engineering</title><link>https://ajdeve.github.io/docs/project2/re-engineering/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/re-engineering/</guid><description>&lt;h1 id="post-modelling">Post-modelling &lt;a href="#post-modelling" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;h2 id="re-engineering">Re-engineering &lt;a href="#re-engineering" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>After running the base models with initially feature engineered dataset, we saw low performing results and then re-engineered.&lt;/p>
+&lt;h3 id="contextual-anomaly-detection">Contextual Anomaly Detection &lt;a href="#contextual-anomaly-detection" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h3>
+&lt;h4 id="odometer-">Odometer: ​ &lt;a href="#odometer-" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>Standard car odometer should have max 300,000 miles.​&lt;/li>
+&lt;li>Trimming data with 75th quantile + 3*IQR, ~268,000, as a cut reduced skewness from 3.04 to 0.3​.
+Only new car should have 0 odometer so trimmed otherwise​.&lt;/li>
+&lt;/ul>
+&lt;h4 id="price">Price:​ &lt;a href="#price" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>Dropped cars below $1000 and greater than $200,000 that​
+are in the extreme ranges not fit for our analysis purpose​&lt;/li>
+&lt;li>Max car price was three billion dollars ​&lt;/li>
+&lt;/ul>
+&lt;h4 id="msrp">MSRP:​ &lt;a href="#msrp" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;ul>
+&lt;li>MSRP is the manufacturer&amp;rsquo;s suggested retail price (list price) ​&lt;/li>
+&lt;li>Dropped MSRP &amp;lt; car price as MSRP should be higher than​
+used car selling price​&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Code Reference&lt;/strong>&lt;/p></description></item><item><title>Models</title><link>https://ajdeve.github.io/docs/project2/models/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/models/</guid><description>&lt;h1 id="models">Models &lt;a href="#models" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;ul>
+&lt;li>Our goal is to predict the sale price of a used car, which is a supervised regression problem. We pick our models base on two considerations, flexibility (accuracy) and interpretability.​&lt;/li>
+&lt;li>We value model accuracy over interpretability because:​&lt;/li>
+&lt;li>The industry we are in doesn’t require we provide explanation for the decision we make.​&lt;/li>
+&lt;li>Features of our used car dataset are easy to understand, thus making it easy for us to debug the model even without high model interpretability.​&lt;/li>
+&lt;/ul>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/f2.png"
+ alt="Model Tradeoffs"
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>Model Tradeoffs&lt;/figcaption>
+&lt;/figure>
+
+&lt;h2 id="our-model-selection">Our Model Selection &lt;a href="#our-model-selection" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Linear Regression​&lt;/p></description></item><item><title>Result</title><link>https://ajdeve.github.io/docs/project2/result/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project2/result/</guid><description>&lt;h2 id="model-results">Model Results &lt;a href="#model-results" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>Just like our expectation, Ensemble Tree methods, specifically XGBoost has the best overall performance. ​
+This is not very surprising since ensemble method is known to:​&lt;/p>
+&lt;ul>
+&lt;li>Have higher predictive accuracy, compared to the individual models.​&lt;/li>
+&lt;li>Be very useful when there is both linear and non-linear type of data in the dataset​&lt;/li>
+&lt;/ul>
+&lt;p>Linear Regression and Linear SVR, like expected, didn’t perform well. From the R squared score, we see that both models could not capture all the variance of our data.​
+XGBoost performs better than Random Forest.&lt;/p></description></item></channel></rss>

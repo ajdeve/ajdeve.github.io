@@ -1,5 +1,217 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP Classification on</title><link>https://ajdeve.github.io/docs/project1/</link><description>Recent content in NLP Classification on</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Mon, 14 Mar 2022 08:48:45 +0000</lastBuildDate><atom:link href="https://ajdeve.github.io/docs/project1/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://ajdeve.github.io/docs/project1/introduction/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/introduction/</guid><description>Amazon Review Analysis &amp;amp; Application # Project Objective: # To help amazon optimize and improve its overall ecommerce experience through the scope of customer and seller
-Project Approach: # Helpful reviews result in better sales performance, less return, and a higher conversion rate. ​​ # 👉 Predict helpful reviews (0,1) before the review receives any traction and customers' votes on its helpfulness (classification). In return, Amazon can better understand how to rank their reviews, and sellers can identify helpful reviews and use them to improve selling strategies and products.</description></item><item><title>EDA</title><link>https://ajdeve.github.io/docs/project1/eda/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/eda/</guid><description>Initial General EDA # General EDA Top2Vec # Intention of running topical modelling on review column of dataset is to check whether it holds sufficient information for us to move forward with our project, and the breadth and depth of information in reviews is hard to capture manually given large dataset.
-Import Spark NLP and import Top2Vec # #Spark NLP import sparknlp from sparknlp.pretrained import PretrainedPipeline from sparknlp.annotator import * from sparknlp.</description></item><item><title>Data Preparation</title><link>https://ajdeve.github.io/docs/project1/dataprep/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/dataprep/</guid><description>Data Preparation # Remove NaN
-Get Products With Total Votes &amp;gt; 10
-df = df.filter(col('total_votes') &amp;gt; 10) df.count() Combine review_headline with review_body to create review text By doing so, we can minimize information loss by reducing number of null rows by combining both columns, as they have different number of null rows. df = df.fillna(&amp;quot;&amp;quot;, &amp;quot;review_body&amp;quot;) df = df.fillna(&amp;quot;&amp;quot;, &amp;quot;review_headline&amp;quot;) df = df.withColumn('review_text', F.concat('review_headline', F.lit(&amp;quot; &amp;quot;), 'review_body')) df.show(1, vertical = True, truncate = False) Create Helpful Ratio &amp;amp; Helful column for our modelling Helpful Ratio: helpful_votes/ total votes ​ Created Column Helpful: ​</description></item><item><title>Modelling</title><link>https://ajdeve.github.io/docs/project1/modelling/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/modelling/</guid><description>Recap # Amazon reviews that are voted as helpful are assumed to be reviews that people will naturally want to read more of​ Reviews are an important part of the consumer&amp;rsquo;s purchasing decisions. They are just as, if not more important than star ratings that are not descriptive enough​ However, reviews may not have enough helpfulness score if it is new and has yet to gain any traction. Lack of participation and feedback from other purchasers can also lead to insufficient scoring​ Therefore, prediction of review helpfulness before other users even see them can help Amazon push these reviews up and provide a better consumer buying experience​ Classification problems = classifier models; Text data = natural language processing</description></item><item><title>Result</title><link>https://ajdeve.github.io/docs/project1/result/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/result/</guid><description>Result of Logistic Regression &amp;amp; Random Forest # Product Category Logistic Regression Random Forest Books 0.85 / 0.84 0.83 / 0.83 E-Books 0.98 / 0.71 0.77 / 0.78 Music 0.85 / 0.83 0.72 / 0.72 Digital Music 0.82 / 0.74 0.67 / 0.68 DVD 0.80 / 0.78 0.68 / 0.68 Digital Video 0.78 / 0.72 0.66 / 0.65 Software 0.94 / 0.82 0.86 / 0.86 Digital Software 0.99 / 0.84 0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NLP Classification on</title><link>https://ajdeve.github.io/docs/project1/</link><description>Recent content in NLP Classification on</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 14 Mar 2022 08:48:45 +0000</lastBuildDate><atom:link href="https://ajdeve.github.io/docs/project1/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://ajdeve.github.io/docs/project1/introduction/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/introduction/</guid><description>&lt;h1 id="amazon-review-analysis--application">Amazon Review Analysis &amp;amp; Application &lt;a href="#amazon-review-analysis--application" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;h2 id="project-objective">Project Objective: &lt;a href="#project-objective" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>To help amazon optimize and improve its overall ecommerce experience through the scope of customer and seller&lt;/p>
+&lt;h2 id="project-approach">Project Approach: &lt;a href="#project-approach" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;h4 id="helpful-reviews-result-in-better-sales-performance-less-return-and-a-higher-conversion-rate-">Helpful reviews result in better sales performance, less return, and a higher conversion rate. ​​ &lt;a href="#helpful-reviews-result-in-better-sales-performance-less-return-and-a-higher-conversion-rate-" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;div class="alert alert-doks d-flex" role="alert">
+ &lt;div class="flex-shrink-1 alert-icon">👉 &lt;/div>
+ 
+ &lt;div class="w-100">Predict helpful reviews (0,1) before the review receives any traction and customers' votes on its helpfulness (classification). &lt;/div>
+ 
+&lt;/div>
+
+&lt;p>In return, Amazon can better understand how to rank their reviews, and sellers can identify helpful reviews and use them to improve selling strategies and products.&lt;/p></description></item><item><title>EDA</title><link>https://ajdeve.github.io/docs/project1/eda/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/eda/</guid><description>&lt;h2 id="initial-general-eda">Initial General EDA &lt;a href="#initial-general-eda" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;figure>
+ &lt;img
+ src="https://ajdeve.github.io/images/amazon1.png"
+ alt="General EDA"
+ width="100%"
+ height="auto"/>
+ &lt;figcaption>General EDA&lt;/figcaption>
+&lt;/figure>
+
+&lt;h2 id="top2vec">Top2Vec &lt;a href="#top2vec" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h2>
+&lt;p>Intention of running topical modelling on review column of dataset is to check whether it holds sufficient information for us to move forward with our project, and the breadth and depth of information in reviews is hard to capture manually given large dataset.&lt;/p>
+&lt;h4 id="import-spark-nlp-and-import-top2vec">Import Spark NLP and import Top2Vec &lt;a href="#import-spark-nlp-and-import-top2vec" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;pre>&lt;code>#Spark NLP
+import sparknlp
+from sparknlp.pretrained import PretrainedPipeline
+from sparknlp.annotator import *
+from sparknlp.base import *
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+import pyspark.sql.functions as F
+
+#Top2Vec
+from top2vec import Top2Vec
+&lt;/code>&lt;/pre>
+&lt;h4 id="initialize-spark-nlp-context">Initialize Spark NLP context &lt;a href="#initialize-spark-nlp-context" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;pre>&lt;code># Initialize spark context 
+spark = SparkSession.builder \
+ .appName(&amp;quot;Spark NLP&amp;quot;)\
+ .master(&amp;quot;local[4]&amp;quot;)\
+ .config(&amp;quot;spark.driver.memory&amp;quot;,&amp;quot;16G&amp;quot;)\
+ .config(&amp;quot;spark.driver.maxResultSize&amp;quot;, &amp;quot;0&amp;quot;) \
+ .config(&amp;quot;spark.kryoserializer.buffer.max&amp;quot;, &amp;quot;2000M&amp;quot;)\
+ .config(&amp;quot;spark.jars.packages&amp;quot;, &amp;quot;com.johnsnowlabs.nlp:spark-nlp_2.12:3.4.1&amp;quot;)\
+ .getOrCreate()
+&lt;/code>&lt;/pre>
+&lt;h4 id="read-the-dataset-with-spark">Read the dataset with spark &lt;a href="#read-the-dataset-with-spark" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;pre>&lt;code># Read data 
+df = spark.read \
+ .option(&amp;quot;quote&amp;quot;, &amp;quot;\&amp;quot;&amp;quot;) \
+ .option(&amp;quot;escape&amp;quot;, &amp;quot;\&amp;quot;&amp;quot;) \
+ .option(&amp;quot;ignoreLeadingWhiteSpace&amp;quot;,True) \
+ .csv(&amp;quot;dataset.csv&amp;quot;,inferSchema=True,header=True, sep = ',')
+
+&lt;/code>&lt;/pre>
+&lt;h4 id="create-a-nlp-pipeline-that-cleans-the-review_text-removing-html-tags-and-unnecessary-words">Create a NLP pipeline that cleans the review_text, removing html tags and unnecessary words &lt;a href="#create-a-nlp-pipeline-that-cleans-the-review_text-removing-html-tags-and-unnecessary-words" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;pre>&lt;code class="language-python">documentAssembler = DocumentAssembler() \
+ .setInputCol('review_text') \
+ .setOutputCol('document')
+
+cleanUpPatterns = [&amp;quot;&amp;lt;[^&amp;gt;]*&amp;gt;&amp;quot;]
+
+documentNormalizer = DocumentNormalizer() \
+ .setInputCols(&amp;quot;document&amp;quot;) \
+ .setOutputCol(&amp;quot;normalizedDocument&amp;quot;) \
+ .setAction(&amp;quot;clean&amp;quot;) \
+ .setPatterns(cleanUpPatterns) \
+ .setReplacement(&amp;quot; &amp;quot;) \
+ .setPolicy(&amp;quot;pretty_all&amp;quot;) \
+ .setLowercase(True)
+
+sentenceDetector = SentenceDetector() \
+ .setInputCols([&amp;quot;normalizedDocument&amp;quot;]) \
+ .setOutputCol(&amp;quot;sentence&amp;quot;)
+
+tokenizer = RegexTokenizer() \
+ .setInputCols(['sentence']) \
+ .setOutputCol('token') \
+ .setPattern(&amp;quot;\\W&amp;quot;) \
+ .setToLowercase(True)
+
+stopwords_cleaner = StopWordsCleaner()\
+ .setInputCols(['token']) \
+ .setOutputCol('clean') \
+ .setCaseSensitive(False)
+
+finisher = Finisher() \
+ .setInputCols([&amp;quot;clean&amp;quot;]) \
+
+docPatternRemoverPipeline = \
+ Pipeline() \
+ .setStages([
+ documentAssembler,
+ documentNormalizer,
+ sentenceDetector,
+ tokenizer, 
+ stopwords_cleaner, 
+ finisher])
+
+ds = docPatternRemoverPipeline.fit(df).transform(df)
+&lt;/code>&lt;/pre>
+&lt;h4 id="transform-cleaned-dataset-into-top2vec-input-format">Transform cleaned dataset into Top2Vec input format &lt;a href="#transform-cleaned-dataset-into-top2vec-input-format" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;pre>&lt;code>#Convert finished_clean column into string from array&amp;lt;string&amp;gt; 
+ds2 = ds.withColumn('finished_clean', concat_ws(',', 'finished_clean'))
+
+#Remove comma from flattened string finished_clean
+ds2 = ds2.withColumn(&amp;quot;finished_clean&amp;quot;, F.regexp_replace('finished_clean',r'[,]',' '))
+
+#Final clean review data 
+ds2 = ds2.select('finished_clean')
+
+#FlatMap to put it into Top2Vec model 
+review_text=ds2.rdd.flatMap(lambda x: x).collect()
+&lt;/code>&lt;/pre>
+&lt;h4 id="universal-sentence-encoder-is-used-for-top2vec">Universal Sentence Encoder is used for Top2Vec &lt;a href="#universal-sentence-encoder-is-used-for-top2vec" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h4>
+&lt;p>Bert is also an option, but I chose USE because it is one of the latest powerful Spark NLP transformer.&lt;/p></description></item><item><title>Data Preparation</title><link>https://ajdeve.github.io/docs/project1/dataprep/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/dataprep/</guid><description>&lt;h1 id="data-preparation">Data Preparation &lt;a href="#data-preparation" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>Remove NaN&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Get Products With Total Votes &amp;gt; 10&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>df = df.filter(col('total_votes') &amp;gt; 10)
+df.count()
+&lt;/code>&lt;/pre>
+&lt;ol start="3">
+&lt;li>Combine review_headline with review_body to create review text
+By doing so, we can minimize information loss by reducing number of null rows by combining both columns, as they have different number of null rows.&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>df = df.fillna(&amp;quot;&amp;quot;, &amp;quot;review_body&amp;quot;)
+df = df.fillna(&amp;quot;&amp;quot;, &amp;quot;review_headline&amp;quot;)
+df = df.withColumn('review_text', F.concat('review_headline', F.lit(&amp;quot; &amp;quot;), 'review_body'))
+df.show(1, vertical = True, truncate = False)
+&lt;/code>&lt;/pre>
+&lt;ol start="4">
+&lt;li>
+&lt;p>Create Helpful Ratio &amp;amp; Helful column for our modelling
+Helpful Ratio: helpful_votes/ total votes ​
+Created Column Helpful: ​&lt;/p></description></item><item><title>Modelling</title><link>https://ajdeve.github.io/docs/project1/modelling/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/modelling/</guid><description>&lt;h1 id="recap">Recap &lt;a href="#recap" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;p>Amazon reviews that are voted as helpful are assumed to be reviews that people will naturally want to read more of​
+Reviews are an important part of the consumer&amp;rsquo;s purchasing decisions. They are just as, if not more important than star ratings that are not descriptive enough​
+However, reviews may not have enough helpfulness score if it is new and has yet to gain any traction. Lack of participation and feedback from other purchasers can also lead to insufficient scoring​
+Therefore, prediction of review helpfulness before other users even see them can help Amazon push these reviews up and provide a better consumer buying experience​
+Classification problems = classifier models; Text data = natural language processing&lt;/p></description></item><item><title>Result</title><link>https://ajdeve.github.io/docs/project1/result/</link><pubDate>Mon, 14 Mar 2022 08:48:45 +0000</pubDate><guid>https://ajdeve.github.io/docs/project1/result/</guid><description>&lt;h1 id="result-of-logistic-regression--random-forest">Result of Logistic Regression &amp;amp; Random Forest &lt;a href="#result-of-logistic-regression--random-forest" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>Product Category&lt;/th>
+ &lt;th>Logistic Regression&lt;/th>
+ &lt;th>Random Forest&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>Books&lt;/td>
+ &lt;td>0.85 / 0.84&lt;/td>
+ &lt;td>0.83 / 0.83&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>E-Books&lt;/td>
+ &lt;td>0.98 / 0.71&lt;/td>
+ &lt;td>0.77 / 0.78&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Music&lt;/td>
+ &lt;td>0.85 / 0.83&lt;/td>
+ &lt;td>0.72 / 0.72&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Digital Music&lt;/td>
+ &lt;td>0.82 / 0.74&lt;/td>
+ &lt;td>0.67 / 0.68&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DVD&lt;/td>
+ &lt;td>0.80 / 0.78&lt;/td>
+ &lt;td>0.68 / 0.68&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Digital Video&lt;/td>
+ &lt;td>0.78 / 0.72&lt;/td>
+ &lt;td>0.66 / 0.65&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Software&lt;/td>
+ &lt;td>0.94 / 0.82&lt;/td>
+ &lt;td>0.86 / 0.86&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Digital Software&lt;/td>
+ &lt;td>0.99 / 0.84&lt;/td>
+ &lt;td>0.82 / 0.83&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Toys&lt;/td>
+ &lt;td>0.99 / 0.84&lt;/td>
+ &lt;td>0.89 / 0.89&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Digital Video Games&lt;/td>
+ &lt;td>0.88 / 0.70&lt;/td>
+ &lt;td>0.69 / 0.69&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Average&lt;/td>
+ &lt;td>0.89 / 0.72&lt;/td>
+ &lt;td>0.83 / 0.76&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h1 id="result-of-use">Result of USE &lt;a href="#result-of-use" class="anchor" aria-hidden="true">#&lt;/a>&lt;/h1>
+&lt;p>Results of running model on Digital Video category dataset&lt;/p></description></item></channel></rss>
